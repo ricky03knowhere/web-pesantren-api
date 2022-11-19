@@ -1,11 +1,14 @@
 "use strict";
 
-module.exports = (mongoose) => {
+const { Schema } = require("mongoose");
+
+module.exports = async (mongoose) => {
   const newSchema = new mongoose.Schema(
     {
-      posCodeId: {
-        type: Number,
-      },
+      // posCodeId: {
+      //   type: Schema.Types.ObjectId,
+      //   ref: "postCodes",
+      // },
       email: {
         type: String,
         unique: true,
@@ -15,6 +18,7 @@ module.exports = (mongoose) => {
       },
       isAdmin: {
         type: Boolean,
+        default: false,
       },
       name: {
         type: String,
@@ -63,6 +67,6 @@ module.exports = (mongoose) => {
       },
     }
   );
-  const User = mongoose.model("User", newSchema);
+  const User = await mongoose.model("User", newSchema);
   return User;
 };

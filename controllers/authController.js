@@ -11,8 +11,9 @@ exports.register = async (req, res) => {
     const { name, email, password } = req.body;
     // console.log(req.body);
     // Validate user input
+    // res.header( "Access-Control-Allow-Origin" );
     if (!(email && password && name)) {
-      res.status(400).send("All input is required");
+      return res.status(400).send("All input is required");
     }
 
     // check if user already exist
@@ -20,7 +21,7 @@ exports.register = async (req, res) => {
     const oldUser = await User.findOne({ email });
 
     if (oldUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.status(409).json("User Already Exist. Please Login");
     }
 
     // Encrypt user password
@@ -35,7 +36,7 @@ exports.register = async (req, res) => {
 
     // Create token
     const token = jwt.sign(
-      { user_id: user._id, email },
+      { user_id: user._id, email, name },
       process.env.TOKEN_KEY,
       {
         expiresIn: "2h",

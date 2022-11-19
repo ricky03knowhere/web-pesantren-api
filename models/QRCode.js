@@ -5,7 +5,7 @@ module.exports = (mongoose) => {
   const newSchema = new mongoose.Schema({
     qrCodeId: {
       type: String,
-      required: true,
+      // required: true,
       // ref: "users",
     },
     connectedDeviceId: {

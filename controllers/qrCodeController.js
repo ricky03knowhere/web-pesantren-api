@@ -49,8 +49,8 @@ exports.generate = async (req, res) => {
     const dataImage = await QR.toDataURL(encryptedData);
 
     // Return qr code
-    console.log("sent...");
-    console.log(encryptedData);
+    // console.log("sent...");
+    // console.log(encryptedData);
     // res.header("Access-Control-Allow-Origin", "*");
     res.status(200).json(dataImage);
     // return dataImage;
