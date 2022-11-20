@@ -6,4 +6,4 @@ const routes = express.Router();
 routes.post("/generate", generate);
 routes.post("/validate", validate);
 
-module.exports = { QRCodeRoutes: routes };
+module.exports = { qrCodeRoutes: routes };

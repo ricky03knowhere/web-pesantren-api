@@ -5,4 +5,4 @@ const routes = express.Router();
 
 routes.get("/", getAll);
 
-module.exports = { UserRoutes: routes };
+module.exports = { userRoutes: routes };

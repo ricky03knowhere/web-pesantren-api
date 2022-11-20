@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const { authRoutes } = require("./routes/authRoutes");
-const { QRCodeRoutes } = require("./routes/qrCodeRoutes");
-const { UserRoutes } = require("./routes/userRoute");
+const { qrCodeRoutes } = require("./routes/qrCodeRoutes");
+const { userRoutes } = require("./routes/userRoute");
+const { infoRoutes } = require("./routes/infoRoutes");
 const app = express();
 const dotenv = require("dotenv");
 
@@ -18,8 +19,9 @@ app.use(cors({ origin: true, credentials: true }));
 // Routes
 app.get("/", (req, res) => res.send("testing"));
 app.use("/auth", authRoutes);
-app.use("/qr", QRCodeRoutes);
-app.use("/user", UserRoutes);
+app.use("/qr", qrCodeRoutes);
+app.use("/user", userRoutes);
+app.use("/info", infoRoutes);
 
 // server listening
 app.listen(port, () => {
