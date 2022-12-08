@@ -4,6 +4,7 @@ const { authRoutes } = require("./routes/authRoutes");
 const { qrCodeRoutes } = require("./routes/qrCodeRoutes");
 const { userRoutes } = require("./routes/userRoute");
 const { infoRoutes } = require("./routes/infoRoutes");
+const { transactionRoutes } = require("./routes/transactionRoutes");
 const app = express();
 const dotenv = require("dotenv");
 
@@ -16,12 +17,16 @@ const port = process.env.PORT || API_PORT;
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 
+// Serve Static files
+app.use("/images", express.static("assets/img"));
+
 // Routes
 app.get("/", (req, res) => res.send("testing"));
 app.use("/auth", authRoutes);
 app.use("/qr", qrCodeRoutes);
 app.use("/user", userRoutes);
 app.use("/info", infoRoutes);
+app.use("/transaction", transactionRoutes);
 
 // server listening
 app.listen(port, () => {

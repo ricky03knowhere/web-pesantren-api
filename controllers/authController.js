@@ -69,16 +69,11 @@ exports.login = async (req, res) => {
 
     // Validate if user exist in our database
     const user = await User.findOne({ email });
-
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
-      const token = jwt.sign(
-        { userId: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
+      const token = jwt.sign({ ...user._doc }, process.env.TOKEN_KEY, {
+        expiresIn: "2h",
+      });
 
       // save user token
       user.token = token;

@@ -235,10 +235,31 @@ let kitab = [
     "wahhab.jpg",
   ],
   [
-    "Kitab Muin",
+    "Kitab Fathul Muin",
     "Syekh Zainuddin Al Malibari",
     "Syarah",
     "Kitab Kitab Fathul Mu'in merupakan salah satu kitab yang dikarang oleh Ahmad Zainuddin Alfannani, kitab ini membahas tentang fiqih dalam kitab ini cukup lengkap karena mencangkup bab thaharah hingga jinayat atau pidana.",
+    "muin.jpg",
+  ],
+  [
+    "Kitab Fathul Qarib",
+    "Muhammad bin Qasim",
+    "Syarah",
+    "Isi dari kitab Fathul Qorib ini terdiri dari muqaddimah dan pembahasan ilmu fiqih yang secara garis besar terdiri atas empat bagian, yaitu tentang cara pelaksanaan ibadah, muamalat, masalah nikah, dan kajian hukum Islam yang berbicara tentang kriminalitas atau jinayat.",
+    "qarib.jpg",
+  ],
+  [
+    "Kitab Safinah",
+    "Syekh Salim bin Abdullah bin Saad bin Sumair Al hadhrami",
+    "Fiqih",
+    "Kitab Safinah Al-Najah ialah salah satu kitab yang diajarkan di pesantren yang berisikan tentang ajaran fiqih dalam Islam. Di dalamnya membahas tentang Aqidah (rukun iman dan rukun Islam), Thaharah, Shalat, Jenazah, Zakat dan Puasa.",
+    "safinah.jpg",
+  ],
+  [
+    "Kitab Alfiyyah",
+    "Ibnu Malik",
+    "Bahasa Arab",
+    "Membahas dengan detail aturan gramatika Bahasa Arab, membahas tentang kaidah-kaidah Ilmu Nahwu-Sharaf. Mulai dari karakteristik kata benda (isim), kata kerja (fi’il), objek (maf’ul) yang punya banyak variasi, harful jarr (huruf yang mengkasrahkan) beserta faidah-faidahnya, aturan membuat plural (jama'), panggilan (nida'), dan sebagainya.",
     "muin.jpg",
   ],
 ];

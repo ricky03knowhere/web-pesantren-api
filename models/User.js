@@ -27,6 +27,10 @@ module.exports = async (mongoose) => {
         type: String,
         default: null,
       },
+      gender: {
+        type: String,
+        default: null,
+      },
       address: {
         type: String,
         default: null,

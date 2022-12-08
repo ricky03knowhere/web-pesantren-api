@@ -89,9 +89,9 @@ exports.validate = async (req, res) => {
       qrCodeId: qrCodeIdDecoded.qrCodeId,
     });
 
-    console.log('get QRCode', getNewQrCodeId);
+    console.log("get QRCode", getNewQrCodeId);
     const connectedDeviceData = {
-      userId: userDecoded.userId,
+      userId: userDecoded._id,
       qrCodeId: getNewQrCodeId._id,
       deviceName: deviceInformation.deviceName,
       deviceModel: deviceInformation.deviceModel,
@@ -101,7 +101,7 @@ exports.validate = async (req, res) => {
 
     const connectedDevice = await ConnectedDevice.create(connectedDeviceData);
 
-    console.log('qrCodeID',  getNewQrCodeId._id);
+    console.log("qrCodeID", getNewQrCodeId._id);
     // Update qr code
     await QRCode.findOneAndUpdate(
       { _id: getNewQrCodeId._id },
@@ -113,14 +113,14 @@ exports.validate = async (req, res) => {
     );
 
     // Find user
-    console.log(userDecoded.userId);
-    console.log(mongoose.Types.ObjectId(userDecoded.userId));
+    console.log(userDecoded._id);
+    console.log(mongoose.Types.ObjectId(userDecoded._id));
     const user = await User.findById({
-      _id: mongoose.Types.ObjectId(userDecoded.userId),
+      _id: mongoose.Types.ObjectId(userDecoded._id),
     });
 
     // Create token
-    const authToken = jwt.sign({ user_id: user._id }, process.env.TOKEN_KEY, {
+    const authToken = jwt.sign({ ...user._doc }, process.env.TOKEN_KEY, {
       expiresIn: "2h",
     });
 
@@ -129,4 +129,33 @@ exports.validate = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+// Get active devices
+exports.activeDevice = async (req, res) => {
+  const data = await ConnectedDevice.find()
+    .then((data) => data)
+    .catch((err) => console.log(err));
+
+  return res.status(200).json(data);
+};
+
+// Get logged user
+exports.loggedUser = async (req, res) => {
+  const data = await QRCode.findOne({ where: { isActive: true } })
+    .then((data) => data)
+    .catch((err) => console.log(err));
+
+  const getConnectedDevice = await ConnectedDevice.findOne({
+    _id: data.connectedDeviceId,
+  })
+    .then((data) => data)
+    .catch((err) => console.log(err));
+
+  console.log("connected ==>> ", getConnectedDevice);
+  const getUser = await User.findOne({ _id: getConnectedDevice.userId })
+    .then((data) => data)
+    .catch((err) => console.log(err));
+
+  return res.status(200).json(getUser);
 };
