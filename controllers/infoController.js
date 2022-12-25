@@ -12,6 +12,11 @@ exports.getPengajar = async (req, res) => {
   res.status(200).json(data);
 };
 
+exports.getSantri = async (req, res) => {
+  const data = await User.find({ position: "santri" });
+  res.status(200).json(data);
+};
+
 exports.getKegiatan = async (req, res) => {
   const data = await Kegiatan.find();
   res.status(200).json(data);

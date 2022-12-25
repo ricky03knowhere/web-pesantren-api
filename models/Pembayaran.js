@@ -6,6 +6,7 @@ module.exports = (mongoose) => {
   const newSchema = new mongoose.Schema(
     {
       userId: {
+        type: String,
         type: Schema.Types.ObjectId,
         required: true,
         ref: "users",
@@ -25,9 +26,9 @@ module.exports = (mongoose) => {
         required: true,
       },
       status: {
-        type: Boolean,
+        type: String,
         required: true,
-        default: false,
+        default: "unpaid",
       },
     },
     {

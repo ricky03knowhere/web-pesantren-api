@@ -37,7 +37,7 @@ module.exports = async (mongoose) => {
       },
       position: {
         type: String,
-        default: null,
+        default: 'guest',
       },
       birthDate: {
         type: Date,
@@ -61,7 +61,7 @@ module.exports = async (mongoose) => {
       },
       picture: {
         type: String,
-        default: null,
+        default: 'user.webp',
       },
     },
     {

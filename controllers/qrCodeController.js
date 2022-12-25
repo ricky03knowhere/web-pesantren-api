@@ -35,7 +35,7 @@ exports.generate = async (req, res) => {
     // store QRCode
     const qrCodeId = uuidv4();
     // const generate = await QRCode.create({ qrCodeId });
-    console.log(qrCodeId);
+    // console.log(qrCodeId);
     // Generate encrypted data
     const encryptedData = jwt.sign(
       { qrCodeId: qrCodeId },
@@ -113,8 +113,8 @@ exports.validate = async (req, res) => {
     );
 
     // Find user
-    console.log(userDecoded._id);
-    console.log(mongoose.Types.ObjectId(userDecoded._id));
+    // console.log(userDecoded._id);
+    // console.log(mongoose.Types.ObjectId(userDecoded._id));
     const user = await User.findById({
       _id: mongoose.Types.ObjectId(userDecoded._id),
     });
@@ -142,12 +142,18 @@ exports.activeDevice = async (req, res) => {
 
 // Get logged user
 exports.loggedUser = async (req, res) => {
-  const data = await QRCode.findOne({ where: { isActive: true } })
+  const qrCode = await QRCode.findOne({ isActive: true })
     .then((data) => data)
     .catch((err) => console.log(err));
 
+  // console.log("qrCode ==>> ", qrCode);
+
+  if (!qrCode) {
+    return res.status(403).json({ message: "no user logged in." });
+  }
+
   const getConnectedDevice = await ConnectedDevice.findOne({
-    _id: data.connectedDeviceId,
+    _id: qrCode.connectedDeviceId,
   })
     .then((data) => data)
     .catch((err) => console.log(err));
@@ -158,4 +164,12 @@ exports.loggedUser = async (req, res) => {
     .catch((err) => console.log(err));
 
   return res.status(200).json(getUser);
+};
+
+// Logout user
+exports.loggoutUser = async (req, res) => {
+  const id = req.params.id;
+  await QRCode.findOneAndUpdate({ connectedDeviceId: id }, { isActive: false });
+
+  res.status(200).json({ meesage: "user successfuly logged out." });
 };
