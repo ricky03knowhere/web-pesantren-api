@@ -6,12 +6,13 @@ const {
   paySPP,
   verification,
 } = require("../controllers/transactionController");
+const { uploadImage } = require("../middleware");
 const routes = express.Router();
 
 routes.get("/pembayaran", getAll);
 routes.get("/pembayaran/:id", getPembayaran);
 routes.post("/spp", createSantriSPP);
-routes.put("/spp/pay", paySPP);
+routes.post("/spp/pay", uploadImage.single("picture"), paySPP);
 routes.put("/spp/verification", verification);
 
 module.exports = { transactionRoutes: routes };

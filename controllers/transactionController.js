@@ -1,5 +1,7 @@
 const { models, mongoose, mongo } = require("../models");
 const { Pembayaran, Biaya } = models;
+var fs = require("fs");
+var path = require("path");
 
 exports.getAll = async (req, res) => {
   const data = await Pembayaran.aggregate([
@@ -73,9 +75,12 @@ exports.createSantriSPP = async (userId, gender) => {
     .catch((err) => console.log(err));
 };
 
-exports.paySPP = async (req, res) => {
+exports.paySPP = async (req, res, next) => {
   const id = req.body.id;
-  await Pembayaran.findOneAndUpdate({ _id: id }, req.body)
+  const data = { ...req.body, picture: req.file.filename };
+
+  console.log("data ==>> ", data);
+  await Pembayaran.findOneAndUpdate({ _id: id }, data)
     .then((data) => console.log(data))
     .catch((err) => console.log(err));
 

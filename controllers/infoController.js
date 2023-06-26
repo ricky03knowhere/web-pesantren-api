@@ -1,4 +1,4 @@
-const { models } = require("../models");
+const { models, mongoose } = require("../models");
 const { User, Kegiatan, Kitab, Ekstrakulikuler, Biaya } = models;
 
 exports.getPengajar = async (req, res) => {
@@ -35,4 +35,12 @@ exports.getEkstra = async (req, res) => {
 exports.getBiaya = async (req, res) => {
   const data = await Biaya.find();
   res.status(200).json(data);
+};
+
+exports.EditBiaya = async (req, res) => {
+  await Biaya.findByIdAndUpdate(
+    { _id: mongoose.Types.ObjectId(req.body.id) },
+    req.body
+  );
+  res.status(200).json({ message: "Succesfuly Updated" });
 };

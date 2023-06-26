@@ -13,6 +13,6 @@ routes.post("/generate", generate);
 routes.post("/validate", validate);
 routes.get("/activeDevice", activeDevice);
 routes.get("/loggedUser", loggedUser);
-routes.post("/logoutUser/:id", loggoutUser);
+routes.put("/logoutUser/:id", loggoutUser);
 
 module.exports = { qrCodeRoutes: routes };

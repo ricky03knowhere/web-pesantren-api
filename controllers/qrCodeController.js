@@ -41,7 +41,7 @@ exports.generate = async (req, res) => {
       { qrCodeId: qrCodeId },
       process.env.TOKEN_KEY,
       {
-        expiresIn: "1d",
+        expiresIn: "3d",
       }
     );
 
@@ -91,7 +91,7 @@ exports.validate = async (req, res) => {
 
     console.log("get QRCode", getNewQrCodeId);
     const connectedDeviceData = {
-      userId: userDecoded._id,
+      userId: userDecoded.user_id,
       qrCodeId: getNewQrCodeId._id,
       deviceName: deviceInformation.deviceName,
       deviceModel: deviceInformation.deviceModel,
@@ -163,13 +163,19 @@ exports.loggedUser = async (req, res) => {
     .then((data) => data)
     .catch((err) => console.log(err));
 
-  return res.status(200).json(getUser);
+  return res.status(200).json({ ...getUser._doc, qrCode });
 };
 
 // Logout user
 exports.loggoutUser = async (req, res) => {
   const id = req.params.id;
-  await QRCode.findOneAndUpdate({ connectedDeviceId: id }, { isActive: false });
-
-  res.status(200).json({ meesage: "user successfuly logged out." });
+  if (id)
+  await QRCode.findOneAndUpdate(
+    { connectedDeviceId: mongoose.Types.ObjectId(id) },
+    { isActive: false }
+  )
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+  else null;
+  res.status(200).json({ message: "user successfuly logged out." });
 };

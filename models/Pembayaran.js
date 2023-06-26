@@ -19,7 +19,6 @@ module.exports = (mongoose) => {
       },
       payDate: {
         type: Date,
-        required: false,
       },
       dueDate: {
         type: Date,
@@ -29,6 +28,9 @@ module.exports = (mongoose) => {
         type: String,
         required: true,
         default: "unpaid",
+      },
+      picture: {
+        type: String,
       },
     },
     {
