@@ -4,7 +4,8 @@ dotenv.config();
 module.exports = {
   development: {
     database: {
-      url: "mongodb://localhost:27017/pesantren",
+      // url: "mongodb://localhost:27017/pesantren",
+      url: process.env.MONGO_URI,
       dbName: process.env.DATABASE_NAME,
       protocol: process.env.PROTOCOL,
       username: process.env.USERNAME,
