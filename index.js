@@ -19,7 +19,7 @@ app.use(cors({ origin: '*', methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', credentia
 
 // Serve Static files
 app.use("/images", express.static("assets/img"));
-app.use("/receipt", express.static(express.static(join(__dirname, 'tmp')));
+app.use("/receipt", express.static(join(__dirname, 'tmp')));
 
 // Routes
 app.get("/", (req, res) => res.send("testing"));
