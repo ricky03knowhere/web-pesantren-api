@@ -7,6 +7,7 @@ const { infoRoutes } = require("./routes/infoRoutes");
 const { transactionRoutes } = require("./routes/transactionRoutes");
 const app = express();
 const dotenv = require("dotenv");
+const { join } = require('path');
 
 // Env
 dotenv.config();
